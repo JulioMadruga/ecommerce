@@ -86,7 +86,10 @@ $app->get('/admin/users/create', function (){
 
     $Page = new PageAdmin();
 
+
     $Page->setTpl('users-create');
+
+
 
 });
 
@@ -107,9 +110,10 @@ $app->get('/admin/users/:iduser', function ($iduser){
 
 });
 
-$app->post('/admin/users', function (){
+$app->post('/admin/users/create', function (){
 
     User::verifyLogin();
+    var_dump($_POST);
 
 
 
