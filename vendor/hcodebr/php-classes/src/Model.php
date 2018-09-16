@@ -9,12 +9,13 @@ class Model {
 	public function setData($data)
 	{
 
-		foreach ($data as $key => $value)
+			foreach ($data as $key => $value)
 		{
 
 			$this->{"set".$key}($value);
 
 		}
+
 
 	}
 
@@ -22,7 +23,10 @@ class Model {
 	{
 
 		$method = substr($name, 0, 3);
+
 		$fieldName = substr($name, 3, strlen($name));
+
+
 
 		if (in_array($fieldName, $this->fields))
 		{
@@ -35,6 +39,7 @@ class Model {
 				break;
 
 				case "set":
+
 					$this->values[$fieldName] = $args[0];
 				break;
 
@@ -47,7 +52,7 @@ class Model {
 	public function getValues()
 	{
 
-		return $this->values;
+			return $this->values;
 
 	}
 

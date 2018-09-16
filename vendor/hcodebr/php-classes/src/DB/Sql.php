@@ -56,9 +56,13 @@ class Sql {
 
 		$stmt = $this->conn->prepare($rawQuery);
 
+        //var_dump($params);
 		$this->setParams($stmt, $params);
 
+
 		$stmt->execute();
+
+
 
 		return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
