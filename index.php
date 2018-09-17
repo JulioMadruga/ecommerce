@@ -186,7 +186,7 @@ $app->get('/admin/forgot', function (){
 
 $app->post('/admin/forgot', function (){
 
-   $user = User::getForgot($_POST['email']);
+    User::getForgot($_POST['email']);
 
     header("Location: /admin/forgot/sent");
     exit;
@@ -202,6 +202,53 @@ $app->get('/admin/forgot/sent', function (){
     ]);
 
     $Page->setTpl("forgot-sent");
+
+});
+
+
+$app->get('/admin/forgot/reset', function (){
+
+    $user = User::validForgotDecrypt($_GET["code"]);
+
+    $Page = new PageAdmin([
+        "header" =>false,
+        "footer" =>false
+    ]);
+
+    $Page->setTpl("forgot-reset", array(
+
+        "name" => $user["desperson"],
+        "code" => $_GET["code"]
+
+    ));
+
+});
+
+
+$app->post('/admin/forgot/reset', function (){
+
+    $forgot= User::validForgotDecrypt($_POST["code"]);
+
+    User::setForgotUsed($forgot["idrecovery"]);
+
+    $user = new User();
+
+    $user->get((int)$forgot["iduser"]);
+
+    $password = password_hash($_POST["password"], PASSWORD_DEFAULT, [
+        "const" => 12
+    ]);
+
+    $user->setPassword($password);
+
+
+    $Page = new PageAdmin([
+        "header" =>false,
+        "footer" =>false
+    ]);
+
+    $Page->setTpl("forgot-reset-sucess");
+
 
 });
 
