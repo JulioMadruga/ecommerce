@@ -173,7 +173,37 @@ $app->post('/admin/users/:iduser', function ($iduser){
 
 });
 
+$app->get('/admin/forgot', function (){
 
+    $Page = new PageAdmin([
+        "header" =>false,
+        "footer" =>false
+    ]);
+
+    $Page->setTpl("forgot");
+
+});
+
+$app->post('/admin/forgot', function (){
+
+   $user = User::getForgot($_POST['email']);
+
+    header("Location: /admin/forgot/sent");
+    exit;
+
+});
+
+
+$app->get('/admin/forgot/sent', function (){
+
+    $Page = new PageAdmin([
+        "header" =>false,
+        "footer" =>false
+    ]);
+
+    $Page->setTpl("forgot-sent");
+
+});
 
 
 
