@@ -9,6 +9,7 @@ class Model {
 	public function setData($data)
 	{
 
+
 			foreach ($data as $key => $value)
 		{
 
@@ -21,6 +22,7 @@ class Model {
 
 	public function __call($name, $args)
 	{
+		//var_dump($name);
 
 		$method = substr($name, 0, 3);
 
@@ -35,7 +37,7 @@ class Model {
 			{
 
 				case "get":
-					return $this->values[$fieldName];
+					return (isset($this->values[$fieldName])) ? $this->values[$fieldName] : null;
 				break;
 
 				case "set":
