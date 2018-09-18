@@ -23,6 +23,9 @@ class Mailer
     public  function  __construct($toAdress, $toName, $subject, $tplName, $data = array())
     {
 
+
+
+
         $config = array(
             "tpl_dir"       => $_SERVER["DOCUMENT_ROOT"]."/views/email/",
             "cache_dir"     => $_SERVER["DOCUMENT_ROOT"]."/views-cache/",
@@ -45,6 +48,8 @@ class Mailer
         $this->mail = new \PHPMailer();
 
         $this->mail->isSMTP();
+
+        $this->mail->SMTPOptions = array( 'ssl' => array( 'verify_peer' => false, 'verify_peer_name' => false, 'allow_self_signed' => true ) );
 
         $this->mail->SMTPDebug = 0;
 

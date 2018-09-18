@@ -242,12 +242,13 @@ $app->post('/admin/forgot/reset', function (){
     $user->setPassword($password);
 
 
+
     $Page = new PageAdmin([
         "header" =>false,
         "footer" =>false
     ]);
 
-    $Page->setTpl("forgot-reset-sucess");
+    $Page->setTpl("forgot-reset-success");
 
 
 });
